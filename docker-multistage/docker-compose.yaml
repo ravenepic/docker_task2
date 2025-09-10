@@ -1,0 +1,8 @@
+services:
+  application:
+    build: .
+    container_name: node_application
+    ports:
+      - "3000:3000"
+    volumes:
+      - /opt/host:/opt/docker_mount
