@@ -6,7 +6,7 @@ services:
       - "3000:3000"
     environment:
       - SERVER=app1
-      - PORT=3001
+      - PORT=3000
   app2:
     build: .
     container_name: app2
