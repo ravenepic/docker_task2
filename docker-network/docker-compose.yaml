@@ -1,0 +1,25 @@
+services:
+  containerA:
+    image: ubuntu:25.10
+    container_name: container-A
+    command: ["sleep", "infinity"]
+    networks:
+      - network_AC
+
+  containerB:
+    image: ubuntu:25.10
+    container_name: container-B
+    command: ["sleep", "infinity"]
+    networks:
+      - network_B
+
+  containerC:
+    image: ubuntu:25.10
+    container_name: container-C
+    command: ["sleep", "infinity"]
+    networks:
+      - network_AC
+
+networks:
+  network_AC:
+  network_B:
