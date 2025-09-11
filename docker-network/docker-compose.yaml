@@ -19,6 +19,7 @@ services:
     command: ["sleep", "infinity"]
     networks:
       - network_AC
+      - network_B
 
 networks:
   network_AC:
