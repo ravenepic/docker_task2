@@ -8,5 +8,4 @@ COPY . .
 FROM node:24.7-slim
 WORKDIR /app
 COPY --from=build /app ./
-EXPOSE 3000
 CMD ["node", "server.js"]
