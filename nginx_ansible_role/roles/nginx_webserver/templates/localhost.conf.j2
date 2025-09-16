@@ -1,0 +1,21 @@
+
+server {
+    listen {{ http_port }};
+    server_name {{ server_name }};
+
+    #Redirect HTTP to HTTPS
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen {{ https_port }} ssl;
+    server_name {{ server_name }};
+
+    ssl_certificate     {{ ssl_cert_path }};
+    ssl_certificate_key {{ ssl_key_path }};
+
+    location / {
+        root /var/www/html;
+        index index.html;
+    }
+}

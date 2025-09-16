@@ -1,0 +1,50 @@
+- name: Install nginx
+  ansible.builtin.package:
+    name: nginx
+    state: present
+  become: true
+
+- name: Create a certifcate directory
+  file:
+    path: /etc/nginx/certs
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: create a self-signed certificate if not exists
+  ansible.builtin.command: >
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048   
+    -keyout {{ ssl_key_path }}
+    -out {{ ssl_cert_path }}   
+    -subj "/CN=localhost"
+  args:
+    creates: "{{ ssl_cert_path }}"
+  become: true
+
+- name: Deploy site config to sites-available
+  ansible.builtin.template:
+    src: localhost.conf.j2
+    dest: /etc/sites-available/localhost.conf
+  notify: Restart NGINX
+  become: true
+
+- name: Enable site by creating symlink
+  file:
+    src: /etc/nginx/sites-available/localhost.conf
+    dest: /etc/nginx/sites-enabled/
+    state: link
+  notify: Restart NGINX
+  become: true
+
+- name: Copy index file
+  ansible.builtin.copy:
+    src: index.html
+    dest: /var/www/html/index.html
+  become: true
+
+- name: Ensure nginx is running
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
+  become: true

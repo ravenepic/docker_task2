@@ -1,0 +1,5 @@
+server_name: localhost
+http_port: 80
+https_port: 443
+ssl_cert_path: "/etc/nginx/certs/selfsigned.crt"
+ssl_key_path: "/etc/nginx/certs/selfsigned.key"
