@@ -31,7 +31,7 @@
 - name: Enable site by creating symlink
   file:
     src: /etc/nginx/sites-available/localhost.conf
-    dest: /etc/nginx/sites-enabled/
+    dest: /etc/nginx/sites-enabled/localhost.conf
     state: link
   notify: Restart NGINX
   become: true
