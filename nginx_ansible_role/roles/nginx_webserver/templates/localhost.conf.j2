@@ -15,7 +15,6 @@ server {
     ssl_certificate_key {{ ssl_key_path }};
 
     location / {
-        root /var/www/html;
-        index index.html;
+        proxy_pass http://localhost:3000;
     }
 }
