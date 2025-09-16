@@ -24,7 +24,7 @@
 - name: Deploy site config to sites-available
   ansible.builtin.template:
     src: localhost.conf.j2
-    dest: /etc/sites-available/localhost.conf
+    dest: /etc/nginx/sites-available/localhost.conf
   notify: Restart NGINX
   become: true
 
