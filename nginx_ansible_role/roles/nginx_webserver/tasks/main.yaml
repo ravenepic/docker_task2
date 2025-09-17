@@ -29,17 +29,11 @@
   become: true
 
 - name: Enable site by creating symlink
-  file:
+  ansible.builtin.file:
     src: /etc/nginx/sites-available/localhost.conf
     dest: /etc/nginx/sites-enabled/localhost.conf
     state: link
   notify: Restart NGINX
-  become: true
-
-- name: Copy index file
-  ansible.builtin.copy:
-    src: index.html
-    dest: /var/www/html/index.html
   become: true
 
 - name: Ensure nginx is running
